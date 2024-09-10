@@ -8,5 +8,25 @@
   <body>
     <h1>Welcome to Room: {{ room_name }}</h1>
     <p>Hello, {{ user_name }}!</p>
+
+    <h2>Messages:</h2>
+    <div id="chat-box">
+      {% for message in messages %}
+      <p><strong>{{ message.user }}</strong>: {{ message.content }}</p>
+      {% empty %}
+      <p>No messages yet.</p>
+      {% endfor %}
+    </div>
+
+    <form method="POST">
+      {% csrf_token %}
+      <input
+        type="text"
+        name="message"
+        placeholder="Enter your message"
+        required
+      />
+      <button type="submit">Send</button>
+    </form>
   </body>
 </html>
